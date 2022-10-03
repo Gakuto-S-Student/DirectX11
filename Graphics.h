@@ -20,6 +20,20 @@ public:
 	static Graphics* Get();
 
 	//---------------------------------------------
+	/// Get ID3D11Device
+	///
+	/// \return	pointer on success
+	//---------------------------------------------
+	ID3D11Device* Device();
+
+	//---------------------------------------------
+	/// Get ID3D11DeviceContext
+	///
+	/// \return	pointer on success
+	//---------------------------------------------
+	ID3D11DeviceContext* Context();
+
+	//---------------------------------------------
 	/// Initialize Directx11 
 	///
 	/// \param[in] ( width )
@@ -55,6 +69,7 @@ public:
 	//---------------------------------------------
 	void Present();
 
+
 private:
 	//---------------------------------------------
 	/// Create device and swapchain
@@ -81,6 +96,9 @@ private:
 	//---------------------------------------------
 	/// Create depth stencil view
 	/// 
+	/// \param[in] ( width )
+	/// \param[in] ( height )
+	/// 
 	/// \return	none
 	//---------------------------------------------
 	void CreateDepthStencilView(
@@ -88,11 +106,56 @@ private:
 		const int height    /* [in] */
 	);
 
+	//---------------------------------------------
+	/// Create rasterizer state
+	/// 
+	/// \return	none
+	//---------------------------------------------
+	void CreateRasterizerState();
+
+	//---------------------------------------------
+	/// Create blend state
+	/// 
+	/// \return	none
+	//---------------------------------------------
+	void CreateBlendState();
+
+	//---------------------------------------------
+	/// Create depth stencil state
+	/// 
+	/// \return	none
+	//---------------------------------------------
+	void CreateDepthStencilState();
+	
+	//---------------------------------------------
+	/// Create sampler state
+	/// 
+	/// \return	none
+	//---------------------------------------------
+	void CreateSamplerState();
+
+	//---------------------------------------------
+	/// Set viewport
+	/// 
+	/// \param[in] ( width )
+	/// \param[in] ( height )
+	/// 
+	/// \return	none
+	//---------------------------------------------
+	void SetViewport(
+		const int width,  /* [in] */
+		const int height  /* [in] */
+	);
+
 private:
-	ID3D11Device*			m_device;           /// DirectX11 Device Interface
-	ID3D11DeviceContext*	m_context;          /// DirectX11 DeviceContext Interface
-	IDXGISwapChain*			m_swapChain;        /// DirectX11 SwapChain Interface
-	ID3D11RenderTargetView* m_renderTargetView; /// DirectX11 RenderTargetView Interface
-	ID3D11DepthStencilView* m_depthStencilView; /// DirectX11 DepthStencilView Interface
+	ID3D11Device*			    m_device;               /// DirectX11 Device Interface
+	ID3D11DeviceContext*	    m_context;              /// DirectX11 DeviceContext Interface
+	IDXGISwapChain*			    m_swapChain;            /// DirectX11 SwapChain Interface
+	ID3D11RenderTargetView*     m_renderTargetView;     /// DirectX11 RenderTargetView Interface
+	ID3D11DepthStencilView*     m_depthStencilView;     /// DirectX11 DepthStencilView Interface
+	ID3D11RasterizerState*      m_rasterizerState;      /// DirectX11 RasterizerState Interface
+	ID3D11BlendState*           m_blendState;           /// DirectX11 BlendState Interface
+	ID3D11DepthStencilState*    m_depthStencilState;    /// DirectX11 DepthStencilState Interface
+	ID3D11SamplerState*         m_samplerState;        /// DirectX11 DepthSamplerState Interface
 };
 
