@@ -1,8 +1,10 @@
-/*
-*	Create : 2022/10/03(月)
-*		Author : Gakuto.S
-*		Update : ----/10/--()
-*/
+//==============================================================================
+// Filename: Application.cpp
+// Description:
+// Copyright (C) 2022 Silicon Studio Co., Ltd. All rights reserved.
+//==============================================================================
+#include "Graphics.h"
+
 #include "Application.h"
 
 
@@ -24,21 +26,23 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPara
 
 
 // コンストラクタ
-Application::Application(int width, int height, HINSTANCE hInstance)
-	:Window(width, height, L"App", L"Sample", hInstance, WndProc)
+Application::Application(const int width, const int height, HINSTANCE hInstance)
+	:ApplicationWindow(width, height, L"App", L"Sample", hInstance, WndProc),
+	m_ScreanW(width),
+	m_ScreenH(height)
 {
-
 }
 
 // 初期化処理
 void Application::Init()
 {
-
+	Graphics::Get()->Init(m_ScreanW, m_ScreenH, m_windowHandle);
 }
 
 // 終了処理
 void Application::Uninit()
 {
+	Graphics::Get()->Uninit();
 }
 
 // 更新処理
@@ -49,4 +53,7 @@ void Application::Update()
 // 描画処理
 void Application::Draw()
 {
+	Graphics::Get()->Clear();
+
+	Graphics::Get()->Present();
 }

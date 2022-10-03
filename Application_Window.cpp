@@ -1,14 +1,14 @@
-/*
-*	Create : 2022/10/03(月)
-*		Author : Gakuto.S
-*		Update : ----/10/--()
-*/
-#include "Window.h"
+//==============================================================================
+// Filename: Application_Window.cpp
+// Description:
+// Copyright (C) 2022 Silicon Studio Co., Ltd. All rights reserved.
+//==============================================================================
+#include "Application_Window.h"
 
 // コンストラクタ
-Window::Window(int width, int height, LPCWSTR caption, LPCWSTR className, HINSTANCE hInstance, WNDPROC wndProc)
-    :m_ClassName(className),
-    m_Handle(nullptr),
+ApplicationWindow::ApplicationWindow(int width, int height, LPCWSTR caption, LPCWSTR className, HINSTANCE hInstance, WNDPROC wndProc)
+    :m_className(className),
+    m_windowHandle(nullptr),
     m_hInstance(hInstance)
 {
     WNDCLASSEX wcex{};
@@ -19,8 +19,8 @@ Window::Window(int width, int height, LPCWSTR caption, LPCWSTR className, HINSTA
     wcex.lpszClassName  = className;
     RegisterClassEx(&wcex);
 
-    m_Handle = CreateWindow(
-        m_ClassName,
+    m_windowHandle = CreateWindow(
+        m_className,
         caption,
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,
@@ -33,18 +33,18 @@ Window::Window(int width, int height, LPCWSTR caption, LPCWSTR className, HINSTA
     );
 
     // ウィンドウの表示開始
-    ShowWindow(m_Handle, true);
-    UpdateWindow(m_Handle);
+    ShowWindow(m_windowHandle, true);
+    UpdateWindow(m_windowHandle);
 }
 
 // デストラクタ
-Window::~Window()
+ApplicationWindow::~ApplicationWindow()
 {
-    UnregisterClass(m_ClassName, m_hInstance);
+    UnregisterClass(m_className, m_hInstance);
 }
 
 // ウィンドウ状態
-bool Window::Close()
+bool ApplicationWindow::Close()
 {
     MSG msg;
     if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
