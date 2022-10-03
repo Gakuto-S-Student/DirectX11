@@ -9,6 +9,7 @@
 
 #define SAFE_RELEASE(p)	if(p)	p->Release();	
 
+
 class Graphics
 {
 public:

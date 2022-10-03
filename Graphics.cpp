@@ -135,7 +135,6 @@ void Graphics::CreateDepthStencilView(const int width, const int height)
 	viewDesc.ViewDimension  = D3D11_DSV_DIMENSION::D3D11_DSV_DIMENSION_TEXTURE2D;
 	viewDesc.Flags          = 0;
 	
-	HRESULT ret{};
 	m_device->CreateDepthStencilView(depthStencil, &viewDesc, &m_depthStencilView);
 
 	// レンダーターゲットに設定する
@@ -146,7 +145,7 @@ void Graphics::CreateDepthStencilView(const int width, const int height)
 void Graphics::CreateRasterizerState()
 {
 	D3D11_RASTERIZER_DESC desc{};
-	desc.CullMode           = D3D11_CULL_MODE::D3D11_CULL_BACK;
+	desc.CullMode           = D3D11_CULL_MODE::D3D11_CULL_NONE;
 	desc.FillMode           = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	desc.DepthClipEnable    = true;
 	desc.MultisampleEnable  = false;
@@ -213,8 +212,8 @@ void Graphics::CreateSamplerState()
 void Graphics::SetViewport(const int width, const int height)
 {
 	D3D11_VIEWPORT viewport{};
-	viewport.Width    = width;
-	viewport.Height   = height;
+	viewport.Width    = FLOAT(width);
+	viewport.Height   = FLOAT(height);
 	viewport.MaxDepth = D3D11_MAX_DEPTH;
 	m_context->RSSetViewports(1, &viewport);
 }

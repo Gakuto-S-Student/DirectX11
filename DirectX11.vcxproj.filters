@@ -11,6 +11,12 @@
     <ClCompile Include="Graphics.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics_Cube.cpp">
+      <Filter>Graphics\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics_Shader.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -21,6 +27,15 @@
     </Filter>
     <Filter Include="Graphics">
       <UniqueIdentifier>{c02a570b-6a81-4917-9156-58ff29408644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Cube">
+      <UniqueIdentifier>{4c4212be-1382-4942-9ea9-01fd78513844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shader">
+      <UniqueIdentifier>{b153a1dd-892e-4e46-a85b-5a2834465151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shader\hlsl">
+      <UniqueIdentifier>{8bebe7fb-9006-4632-87d0-27d7ce14f478}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,5 +48,24 @@
     <ClInclude Include="Graphics.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics_Cube.h">
+      <Filter>Graphics\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Shader.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="vertexShader.hlsl">
+      <Filter>Graphics\Shader\hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="pixelShader.hlsl">
+      <Filter>Graphics\Shader\hlsl</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="common.hlsli">
+      <Filter>Graphics\Shader\hlsl</Filter>
+    </None>
   </ItemGroup>
 </Project>
