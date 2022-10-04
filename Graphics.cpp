@@ -185,7 +185,7 @@ void Graphics::CreateBlendState()
 	blendDesc.AlphaToCoverageEnable                 = false;
 	blendDesc.IndependentBlendEnable                = false;
 	blendDesc.RenderTarget[0].BlendEnable           = true;
-	blendDesc.RenderTarget[0].SrcBlend              = D3D11_BLEND::D3D11_BLEND_SRC1_ALPHA;                    // ピクセル シェーダーからのアルファ データ (A) です。ブレンディング前の処理無し
+	blendDesc.RenderTarget[0].SrcBlend              = D3D11_BLEND::D3D11_BLEND_SRC_ALPHA;                     // ピクセル シェーダーからのアルファ データ (A) です。ブレンディング前の処理無し
 	blendDesc.RenderTarget[0].DestBlend             = D3D11_BLEND::D3D11_BLEND_INV_SRC_ALPHA;                 // ピクセル シェーダーからのアルファ データ (A) です。データが反転(1 - A)を生成
 	blendDesc.RenderTarget[0].BlendOp               = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;                     // 加算ブレンド
 	blendDesc.RenderTarget[0].SrcBlendAlpha         = D3D11_BLEND::D3D11_BLEND_ONE;                           // データ ソースの色は白 (1, 1, 1, 1) です。ブレンディング前の処理無し

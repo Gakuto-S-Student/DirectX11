@@ -20,6 +20,9 @@
     <ClCompile Include="Graphics_Camera.cpp">
       <Filter>Graphics\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics_Texture.cpp">
+      <Filter>Graphics\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -43,6 +46,9 @@
     <Filter Include="Graphics\Camera">
       <UniqueIdentifier>{fa2c2a82-9a32-4c80-9b5e-cc1588327065}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Texture">
+      <UniqueIdentifier>{6e76ec73-49ba-4baf-8acc-4726c65fb645}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application_Window.h">
@@ -62,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="Graphics_Camera.h">
       <Filter>Graphics\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics_Texture.h">
+      <Filter>Graphics\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

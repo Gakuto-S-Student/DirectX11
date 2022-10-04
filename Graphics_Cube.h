@@ -30,10 +30,13 @@ public:
 	void Draw();
 
 private:
-	ID3D11Buffer*       m_vertexBuffer;
+	ID3D11Buffer*             m_vertexBuffer;	    /// Vertices buffer
+	ID3D11ShaderResourceView* m_textureResource;    /// Send to texture slot for pixel shader
 
-	ID3D11InputLayout*	m_vertexLayout; /// A vertex layout
-	ID3D11VertexShader* m_vertexShader; /// DirectX11 VertexShader interface
-	ID3D11PixelShader*  m_pixelShader;  /// DirectX11 PixelShader interface
+	ID3D11InputLayout*	      m_vertexLayout;       /// A vertex layout
+	ID3D11VertexShader*       m_vertexShader;       /// DirectX11 VertexShader interface
+	ID3D11PixelShader*        m_pixelShader;        /// DirectX11 PixelShader interface
+
+	DirectX::XMFLOAT3         m_rotate;             /// Rotate XYZ
 };
 
