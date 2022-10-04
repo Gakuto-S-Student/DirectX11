@@ -55,9 +55,8 @@ public:
 	//---------------------------------------------
 	void Draw();
 
-private:
-	int m_ScreanW;	/// ウィンドウ幅
-	int m_ScreenH;	/// ウィンドウ高さ
+	static int m_ScreenW;	/// ウィンドウ幅
+	static int m_ScreenH;	/// ウィンドウ高さ
 
 private:
 	GraphicsCube* m_cube;

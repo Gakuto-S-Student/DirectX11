@@ -3,35 +3,70 @@
 // Description:
 // Copyright (C) 2022 Silicon Studio Co., Ltd. All rights reserved.
 //==============================================================================
+#include "Application.h"
 #include "Graphics.h"
 #include "Graphics_Shader.h"
 
 #include "Graphics_Cube.h"
-
-struct Vector3
-{
-	float x;
-	float y;
-	float z;
-};
-struct Vector2
-{
-	float x;
-	float y;
-};
+using namespace DirectX;
 
 struct Vertex3D
 {
-	Vector3 pos;
-	Vector2 uv;
+	XMFLOAT3 pos;
+	XMFLOAT2 uv;
 };
+
+
 
 Vertex3D g_CubeMeta[]
 {
-	{{-0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}},
-	{{ 0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}},
-	{{-0.5f,  0.5f, 0.0f}, {0.0f, 0.0f}},
-	{{ 0.5f,  0.5f, 0.0f}, {0.0f, 0.0f}}
+	{{ 1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{-1.0f,  1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{-1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}},
+	
+	{{-1.0f,  1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}},
+	
+	{{ 1.0f,  1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}},
+	
+	{{-1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}},
+	
+	{{-1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{-1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}},
+
+	{{ 1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{-1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}},
+
+	{{ 1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f,  1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{-1.0f,  1.0f, -1.0f}, {0.0f, 0.0f}},
+
+	{{-1.0f,  1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f,  1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}},
+
+	{{ 1.0f,  1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}},
+
+	{{-1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{ 1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}},
+
+	{{-1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{-1.0f,  1.0f, -1.0f}, {0.0f, 0.0f}},
+	{{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}},
+
+	{{ 1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{-1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}},
+	{{-1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}},
 };
 
 // 初期化処理
@@ -45,6 +80,8 @@ void GraphicsCube::Init()
 	D3D11_SUBRESOURCE_DATA subResource{};
 	subResource.pSysMem = g_CubeMeta;					// ここにモデルデータ
 	Graphics::Get()->Device()->CreateBuffer(&bufferDesc, &subResource, &m_vertexBuffer);
+
+	// テクスチャの読み込みは此処に追加
 
 	GraphicsShader::LoadVertexAndLayout(&m_vertexShader, &m_vertexLayout);
 	GraphicsShader::LoadPixelShader(&m_pixelShader);
@@ -66,10 +103,37 @@ void GraphicsCube::Draw()
 	Graphics::Get()->Context()->VSSetShader(m_vertexShader, nullptr, 0);
 	Graphics::Get()->Context()->PSSetShader(m_pixelShader, nullptr, 0);
 
+	// 行列変換(model)
+	XMMATRIX translate, rotate, scale;
+	translate = XMMatrixTranslation(0.0f, 0.0f, 0.0f);
+	rotate    = XMMatrixRotationRollPitchYaw(0.0f, 0.0f, 0.0f);
+	scale     = XMMatrixScaling(1.0f, 1.0f, 1.0f);
+
+	XMMATRIX model = translate * rotate * scale;
+	Graphics::Get()->SetModelMatrix(model);
+
+	// 行列変換(view)
+	XMMATRIX view = XMMatrixLookAtLH(
+		{ 0.0f, 5.0f, -5.0f },
+		{ 0.0f, 0.0f,  0.0f },
+		{ 0.0f, 1.0f,  0.0f }
+	);
+	Graphics::Get()->SetViewMatrix(view);
+
+	// 行列変換(projection)
+	XMMATRIX proj = XMMatrixPerspectiveFovLH(
+		1.0f,
+		float(Application::m_ScreenW / Application::m_ScreenH),
+		0.1f,
+		1000.0f
+	);
+	Graphics::Get()->SetProjectionMatrix(proj);
+
+
 	UINT stride = sizeof(Vertex3D);
 	UINT offset = 0;
 	Graphics::Get()->Context()->IASetVertexBuffers(0, 1, &m_vertexBuffer, &stride, &offset);
 
-	Graphics::Get()->Context()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-	Graphics::Get()->Context()->Draw(4, 0);
+	Graphics::Get()->Context()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	Graphics::Get()->Context()->Draw(ARRAYSIZE(g_CubeMeta), 0);
 }

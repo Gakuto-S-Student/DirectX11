@@ -4,6 +4,7 @@
 // Copyright (C) 2022 Silicon Studio Co., Ltd. All rights reserved.
 //==============================================================================
 #include "Graphics.h"
+using namespace DirectX;
 
 #define REF_RATE_DEN 1		// リフレッシュレート(分母)
 #define REF_RATE_NUM 60		// リフレッシュレート(分子)
@@ -38,6 +39,7 @@ void Graphics::Init(int width, int height, HWND hWnd)
 	this->CreateBlendState();
 	this->CreateDepthStencilState();
 	this->CreateSamplerState();
+	this->CreateConstantBuffers();
 	this->SetViewport(width, height);
 }
 
@@ -67,6 +69,27 @@ void Graphics::Clear()
 void Graphics::Present()
 {
 	m_swapChain->Present(true, NULL);
+}
+
+// モデル行列の設定
+void Graphics::SetModelMatrix(const DirectX::XMMATRIX model)
+{
+	XMMATRIX mat = XMMatrixTranspose(model);
+	m_context->UpdateSubresource(m_modelMatrix, 0, nullptr, &mat, 0, 0);
+}
+
+// ビュー行列の設定
+void Graphics::SetViewMatrix(const DirectX::XMMATRIX view)
+{
+	XMMATRIX mat = XMMatrixTranspose(view);
+	m_context->UpdateSubresource(m_viewMatrix, 0, nullptr, &mat, 0, 0);
+}
+
+// プロジェクション行列の設定
+void Graphics::SetProjectionMatrix(const DirectX::XMMATRIX projection)
+{
+	XMMATRIX mat = XMMatrixTranspose(projection);
+	m_context->UpdateSubresource(m_projectionMatrix, 0, nullptr, &mat, 0, 0);
 }
 
 // スワップチェインの生成
@@ -145,7 +168,7 @@ void Graphics::CreateDepthStencilView(const int width, const int height)
 void Graphics::CreateRasterizerState()
 {
 	D3D11_RASTERIZER_DESC desc{};
-	desc.CullMode           = D3D11_CULL_MODE::D3D11_CULL_NONE;
+	desc.CullMode           = D3D11_CULL_MODE::D3D11_CULL_BACK;
 	desc.FillMode           = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 	desc.DepthClipEnable    = true;
 	desc.MultisampleEnable  = false;
@@ -183,7 +206,7 @@ void Graphics::CreateDepthStencilState()
 {
 	D3D11_DEPTH_STENCIL_DESC depthStencilDesc{};
 	depthStencilDesc.DepthEnable    = true;
-	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK::D3D11_DEPTH_WRITE_MASK_ALL;
 	depthStencilDesc.DepthFunc      = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS_EQUAL;
 	depthStencilDesc.StencilEnable  = false;
 	m_device->CreateDepthStencilState(&depthStencilDesc, &m_depthStencilState);
@@ -206,6 +229,27 @@ void Graphics::CreateSamplerState()
 
 	// サンプラーステートの設定
 	m_context->PSSetSamplers(0, 1, &m_samplerState);
+}
+
+// 定数バッファの生成
+void Graphics::CreateConstantBuffers()
+{
+	D3D11_BUFFER_DESC bufferDesc{};
+	bufferDesc.ByteWidth            = sizeof(XMMATRIX);
+	bufferDesc.Usage                = D3D11_USAGE::D3D11_USAGE_DEFAULT;
+	bufferDesc.BindFlags            = D3D11_BIND_FLAG::D3D11_BIND_CONSTANT_BUFFER;
+	bufferDesc.CPUAccessFlags       = 0;
+	bufferDesc.MiscFlags            = 0;
+	bufferDesc.StructureByteStride  = sizeof(float);
+
+	m_device->CreateBuffer(&bufferDesc, nullptr, &m_modelMatrix);
+	m_device->CreateBuffer(&bufferDesc, nullptr, &m_viewMatrix);
+	m_device->CreateBuffer(&bufferDesc, nullptr, &m_projectionMatrix);
+
+	// 頂点シェーダのスロットに設定
+	m_context->VSSetConstantBuffers(0, 1, &m_modelMatrix);      // 0番スロットに model matrix
+	m_context->VSSetConstantBuffers(1, 1, &m_viewMatrix);       // 1番スロットに view matrix
+	m_context->VSSetConstantBuffers(2, 1, &m_projectionMatrix); // 2番スロットに projection matrix 
 }
 
 // ビューポートの設定

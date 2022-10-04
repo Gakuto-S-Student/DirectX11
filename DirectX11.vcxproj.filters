@@ -17,6 +17,7 @@
     <ClCompile Include="Graphics_Shader.cpp">
       <Filter>Graphics\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics_Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -37,6 +38,9 @@
     <Filter Include="Graphics\Shader\hlsl">
       <UniqueIdentifier>{8bebe7fb-9006-4632-87d0-27d7ce14f478}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Camera">
+      <UniqueIdentifier>{fa2c2a82-9a32-4c80-9b5e-cc1588327065}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application_Window.h">
@@ -54,6 +58,7 @@
     <ClInclude Include="Graphics_Shader.h">
       <Filter>Graphics\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics_Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="vertexShader.hlsl">

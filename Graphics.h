@@ -5,6 +5,7 @@
 //==============================================================================
 #pragma once
 #include <d3d11.h>
+#include <DirectXMath.h>
 #pragma comment(lib, "d3d11.lib")
 
 #define SAFE_RELEASE(p)	if(p)	p->Release();	
@@ -69,6 +70,33 @@ public:
 	/// \return	none
 	//---------------------------------------------
 	void Present();
+
+	//---------------------------------------------
+	/// Set model matrix
+	///
+	/// \param[in] ( model )
+	/// 
+	/// \return	none
+	//---------------------------------------------
+	void SetModelMatrix(const DirectX::XMMATRIX model);
+
+	//---------------------------------------------
+	/// Set view matrix
+	///
+	/// \param[in] ( view )
+	/// 
+	/// \return	none
+	//---------------------------------------------
+	void SetViewMatrix(const DirectX::XMMATRIX view);
+
+	//---------------------------------------------
+	/// Set projection matrix
+	///
+	/// \param[in] ( projection )
+	/// 
+	/// \return	none
+	//---------------------------------------------
+	void SetProjectionMatrix(const DirectX::XMMATRIX projection);
 
 
 private:
@@ -136,6 +164,13 @@ private:
 	void CreateSamplerState();
 
 	//---------------------------------------------
+	/// Create constant buffers
+	/// 
+	/// \return	none
+	//---------------------------------------------
+	void CreateConstantBuffers();
+
+	//---------------------------------------------
 	/// Set viewport
 	/// 
 	/// \param[in] ( width )
@@ -157,6 +192,9 @@ private:
 	ID3D11RasterizerState*      m_rasterizerState;      /// DirectX11 RasterizerState Interface
 	ID3D11BlendState*           m_blendState;           /// DirectX11 BlendState Interface
 	ID3D11DepthStencilState*    m_depthStencilState;    /// DirectX11 DepthStencilState Interface
-	ID3D11SamplerState*         m_samplerState;        /// DirectX11 DepthSamplerState Interface
+	ID3D11SamplerState*         m_samplerState;         /// DirectX11 SamplerState Interface
+	ID3D11Buffer*               m_modelMatrix;          /// DirectX11 The buffer is model matrix send to vertex buffer 
+	ID3D11Buffer*               m_viewMatrix;           /// DirectX11 The buffer is view matrix send to vertex buffer
+	ID3D11Buffer*               m_projectionMatrix;     /// DirectX11 The buffer is projection matrix send to vertex buffer
 };
 

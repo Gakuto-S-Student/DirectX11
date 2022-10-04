@@ -8,6 +8,9 @@
 
 #include "Application.h"
 
+int Application::m_ScreenW = 0;
+int Application::m_ScreenH = 0;
+
 
 // ウィンドウプロシージャ
 static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -28,16 +31,16 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPara
 
 // コンストラクタ
 Application::Application(const int width, const int height, HINSTANCE hInstance)
-	:ApplicationWindow(width, height, L"App", L"Sample", hInstance, WndProc),
-	m_ScreanW(width),
-	m_ScreenH(height)
+	:ApplicationWindow(width, height, L"App", L"Sample", hInstance, WndProc)
 {
+	m_ScreenW = width;
+	m_ScreenH = height;
 }
 
 // 初期化処理
 void Application::Init()
 {
-	Graphics::Get()->Init(m_ScreanW, m_ScreenH, m_windowHandle);
+	Graphics::Get()->Init(m_ScreenW, m_ScreenH, m_windowHandle);
 
 	m_cube = new GraphicsCube();
 	m_cube->Init();
