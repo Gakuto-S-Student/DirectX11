@@ -17,7 +17,9 @@
     <ClCompile Include="Graphics_Shader.cpp">
       <Filter>Graphics\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics_Camera.cpp" />
+    <ClCompile Include="Graphics_Camera.cpp">
+      <Filter>Graphics\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -58,7 +60,9 @@
     <ClInclude Include="Graphics_Shader.h">
       <Filter>Graphics\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics_Camera.h" />
+    <ClInclude Include="Graphics_Camera.h">
+      <Filter>Graphics\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="vertexShader.hlsl">

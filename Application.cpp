@@ -5,11 +5,13 @@
 //==============================================================================
 #include "Graphics.h"
 #include "Graphics_Cube.h"
+#include "Graphics_Camera.h"
 
 #include "Application.h"
 
-int Application::m_ScreenW = 0;
-int Application::m_ScreenH = 0;
+#define APP_FOV 1.0f        /// 視野角度
+#define APP_NEAR_Z 0.1f     /// 見える位置(手前)
+#define APP_FAR_Z 100.0f	/// 見える位置(奥行)
 
 
 // ウィンドウプロシージャ
@@ -31,10 +33,10 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPara
 
 // コンストラクタ
 Application::Application(const int width, const int height, HINSTANCE hInstance)
-	:ApplicationWindow(width, height, L"App", L"Sample", hInstance, WndProc)
+	:ApplicationWindow(width, height, L"App", L"Sample", hInstance, WndProc),
+	m_ScreenW(width),
+	m_ScreenH(height)
 {
-	m_ScreenW = width;
-	m_ScreenH = height;
 }
 
 // 初期化処理
@@ -64,6 +66,8 @@ void Application::Update()
 void Application::Draw()
 {
 	Graphics::Get()->Clear();
+	
+	GraphicsCamera::Set3D(APP_FOV, m_ScreenW / m_ScreenH, APP_NEAR_Z, APP_FAR_Z);
 
 	m_cube->Draw();
 

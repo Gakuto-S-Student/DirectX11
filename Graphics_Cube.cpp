@@ -112,23 +112,7 @@ void GraphicsCube::Draw()
 	XMMATRIX model = translate * rotate * scale;
 	Graphics::Get()->SetModelMatrix(model);
 
-	// s—ñ•ÏŠ·(view)
-	XMMATRIX view = XMMatrixLookAtLH(
-		{ 0.0f, 5.0f, -5.0f },
-		{ 0.0f, 0.0f,  0.0f },
-		{ 0.0f, 1.0f,  0.0f }
-	);
-	Graphics::Get()->SetViewMatrix(view);
-
-	// s—ñ•ÏŠ·(projection)
-	XMMATRIX proj = XMMatrixPerspectiveFovLH(
-		1.0f,
-		float(Application::m_ScreenW / Application::m_ScreenH),
-		0.1f,
-		1000.0f
-	);
-	Graphics::Get()->SetProjectionMatrix(proj);
-
+	
 
 	UINT stride = sizeof(Vertex3D);
 	UINT offset = 0;
