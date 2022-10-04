@@ -3,6 +3,7 @@
 // Description:
 // Copyright (C) 2022 Silicon Studio Co., Ltd. All rights reserved.
 //==============================================================================
+
 #include "Graphics.h"
 using namespace DirectX;
 
@@ -128,11 +129,16 @@ void Graphics::CreateDeviceAndSwapChain(int width, int heihgt, HWND hWnd)
 // レンダーターゲットの生成
 void Graphics::CreateRenderTargetView()
 {
-	HRESULT ret{};
-	ID3D11Texture2D* p_renderTarget{};
+	ID3D11Texture2D* p_renderTarget = {};
 	D3D11_TEXTURE2D_DESC textureDesc{};
 	m_swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&p_renderTarget);
-	ret = m_device->CreateRenderTargetView(p_renderTarget, nullptr, &m_renderTargetView);
+	if (!p_renderTarget)
+	{
+		p_renderTarget->Release();
+		return;
+	}
+
+	m_device->CreateRenderTargetView(p_renderTarget, nullptr, &m_renderTargetView);
 }
 
 // 深度バッファの生成
@@ -152,6 +158,11 @@ void Graphics::CreateDepthStencilView(const int width, const int height)
 	textureDesc.CPUAccessFlags      = 0;
 	textureDesc.MiscFlags           = 0;
 	m_device->CreateTexture2D(&textureDesc, nullptr, &depthStencil);
+	if (!depthStencil)
+	{
+		depthStencil->Release();
+		return;
+	}
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC viewDesc{};
 	viewDesc.Format         = textureDesc.Format;

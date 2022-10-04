@@ -30,6 +30,10 @@ ID3D11ShaderResourceView* GraphicsTexture::CreateTexture()
 	
 	ID3D11Texture2D* texture;
 	HRESULT hr = Graphics::Get()->Device()->CreateTexture2D(&textureDesc, nullptr, &texture);
+	if (!texture)
+	{
+		return nullptr;
+	}
 	
 	// テクスチャに書き込む部分
 	D3D11_MAPPED_SUBRESOURCE msr;

@@ -35,7 +35,8 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPara
 Application::Application(const int width, const int height, HINSTANCE hInstance)
 	:ApplicationWindow(width, height, L"App", L"Sample", hInstance, WndProc),
 	m_ScreenW(width),
-	m_ScreenH(height)
+	m_ScreenH(height),
+	m_cube(nullptr)
 {
 }
 
@@ -67,7 +68,7 @@ void Application::Draw()
 {
 	Graphics::Get()->Clear();
 	
-	GraphicsCamera::Set3D(APP_FOV, m_ScreenW / m_ScreenH, APP_NEAR_Z, APP_FAR_Z);
+	GraphicsCamera::Set3D(APP_FOV, float(m_ScreenW / m_ScreenH), APP_NEAR_Z, APP_FAR_Z);
 
 	m_cube->Draw();
 
