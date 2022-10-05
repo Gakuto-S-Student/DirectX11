@@ -18,8 +18,8 @@ public:
 	/// \return true on success
 	//---------------------------------------------
 	static bool LoadVertexAndLayout(
-		ID3D11VertexShader** vs,    /* [out] */
-		ID3D11InputLayout** layout  /* [out] */
+		/* [out] */ ID3D11VertexShader** vs,
+		/* [out] */ ID3D11InputLayout** layout
 	);
 	
 	//---------------------------------------------
@@ -30,7 +30,7 @@ public:
 	/// \return true on success
 	//---------------------------------------------
 	static bool LoadPixelShader(
-		ID3D11PixelShader** ps  /* [out] */
+		/* [out] */ ID3D11PixelShader** ps
 	);
 
 private:
@@ -43,8 +43,8 @@ private:
 	/// \return true on success
 	//---------------------------------------------
 	static bool LoadFile(
-		const std::string fileName, /* [in] */
-		std::string& buffer         /* [out] */
+		/* [in] */  const std::string fileName,
+		/* [out] */ std::string& buffer
 	);
 };
 

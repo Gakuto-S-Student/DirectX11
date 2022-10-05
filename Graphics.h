@@ -8,6 +8,7 @@
 #include <DirectXMath.h>
 #pragma comment(lib, "d3d11.lib")
 
+// ‰ð•úˆ—ƒ}ƒNƒ
 #define SAFE_RELEASE(p)	if(p)	p->Release();	
 
 
@@ -45,9 +46,9 @@ public:
 	/// \return	none
 	//---------------------------------------------
 	void Init(
-		const int width,		/* [in] */
-		const int height,		/* [in] */
-		HWND hWnd				/* [in] */
+		/* [in] */  const int width,
+		/* [in] */  const int height,
+		/* [in] */  HWND hWnd
 	);
 	
 	//---------------------------------------------
@@ -78,7 +79,9 @@ public:
 	/// 
 	/// \return	none
 	//---------------------------------------------
-	void SetModelMatrix(const DirectX::XMMATRIX model);
+	void SetModelMatrix(
+		/* [in] */  const DirectX::XMMATRIX model
+	);
 
 	//---------------------------------------------
 	/// Set view matrix
@@ -87,7 +90,9 @@ public:
 	/// 
 	/// \return	none
 	//---------------------------------------------
-	void SetViewMatrix(const DirectX::XMMATRIX view);
+	void SetViewMatrix(
+		/* [in] */  const DirectX::XMMATRIX view
+	);
 
 	//---------------------------------------------
 	/// Set projection matrix
@@ -96,7 +101,9 @@ public:
 	/// 
 	/// \return	none
 	//---------------------------------------------
-	void SetProjectionMatrix(const DirectX::XMMATRIX projection);
+	void SetProjectionMatrix(
+		/* [in] */  const DirectX::XMMATRIX projection
+	);
 
 
 private:
@@ -110,9 +117,9 @@ private:
 	/// \return	none
 	//---------------------------------------------
 	void CreateDeviceAndSwapChain(
-		const int width,    /* [in] */
-		const int height,   /* [in] */
-		HWND hWnd           /* [in] */
+		/* [in] */  const int width,
+		/* [in] */  const int height,
+		/* [in] */  HWND hWnd
 	);
 
 	//---------------------------------------------
@@ -131,8 +138,8 @@ private:
 	/// \return	none
 	//---------------------------------------------
 	void CreateDepthStencilView(
-		const int width,    /* [in] */
-		const int height    /* [in] */
+		/* [in] */  const int width,
+		/* [in] */  const int height
 	);
 
 	//---------------------------------------------
@@ -179,22 +186,39 @@ private:
 	/// \return	none
 	//---------------------------------------------
 	void SetViewport(
-		const int width,  /* [in] */
-		const int height  /* [in] */
+		/* [in] */  const int width,
+		/* [in] */  const int height
 	);
 
 private:
-	ID3D11Device*			    m_device;               /// DirectX11 Device Interface
-	ID3D11DeviceContext*	    m_context;              /// DirectX11 DeviceContext Interface
-	IDXGISwapChain*			    m_swapChain;            /// DirectX11 SwapChain Interface
-	ID3D11RenderTargetView*     m_renderTargetView;     /// DirectX11 RenderTargetView Interface
-	ID3D11DepthStencilView*     m_depthStencilView;     /// DirectX11 DepthStencilView Interface
-	ID3D11RasterizerState*      m_rasterizerState;      /// DirectX11 RasterizerState Interface
-	ID3D11BlendState*           m_blendState;           /// DirectX11 BlendState Interface
-	ID3D11DepthStencilState*    m_depthStencilState;    /// DirectX11 DepthStencilState Interface
-	ID3D11SamplerState*         m_samplerState;         /// DirectX11 SamplerState Interface
-	ID3D11Buffer*               m_modelMatrix;          /// DirectX11 The buffer is model matrix send to vertex buffer 
-	ID3D11Buffer*               m_viewMatrix;           /// DirectX11 The buffer is view matrix send to vertex buffer
-	ID3D11Buffer*               m_projectionMatrix;     /// DirectX11 The buffer is projection matrix send to vertex buffer
+	//--------------------------------------------------------------------------
+	ID3D11Device*			    m_device;           
+	ID3D11DeviceContext*	    m_context;          
+	IDXGISwapChain*			    m_swapChain;        
+	ID3D11RenderTargetView*     m_renderTargetView; 
+	ID3D11DepthStencilView*     m_depthStencilView; 
+	ID3D11RasterizerState*      m_rasterizerState;  
+	ID3D11BlendState*           m_blendState;       
+	ID3D11DepthStencilState*    m_depthStencilState;
+	ID3D11SamplerState*         m_samplerState;     
+	ID3D11Buffer*               m_modelMatrix;      
+	ID3D11Buffer*               m_viewMatrix;       
+	ID3D11Buffer*               m_projectionMatrix; 
+	//--------------------------------------------------------------------------
+
+	/// <summary>
+	/// ID3D11Device			    m_device;               /// DirectX11 Device Interface
+	/// ID3D11DeviceContext 	    m_context;              /// DirectX11 DeviceContext Interface
+	/// IDXGISwapChain			    m_swapChain;            /// DirectX11 SwapChain Interface
+	/// ID3D11RenderTargetView      m_renderTargetView;     /// DirectX11 RenderTargetView Interface
+	/// ID3D11DepthStencilView      m_depthStencilView;     /// DirectX11 DepthStencilView Interface
+	/// ID3D11RasterizerState       m_rasterizerState;      /// DirectX11 RasterizerState Interface
+	/// ID3D11BlendState            m_blendState;           /// DirectX11 BlendState Interface
+	/// ID3D11DepthStencilState     m_depthStencilState;    /// DirectX11 DepthStencilState Interface
+	/// ID3D11SamplerState          m_samplerState;         /// DirectX11 SamplerState Interface
+	/// ID3D11Buffer                m_modelMatrix;          /// DirectX11 The buffer is model matrix send to vertex buffer 
+	/// ID3D11Buffer                m_viewMatrix;           /// DirectX11 The buffer is view matrix send to vertex buffer
+	/// ID3D11Buffer                m_projectionMatrix;     /// DirectX11 The buffer is projection matrix send to vertex buffer
+	/// </summary>
 };
 

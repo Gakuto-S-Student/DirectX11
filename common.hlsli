@@ -1,3 +1,8 @@
+//==============================================================================
+// Filename: common.hlsli
+// Description:
+// Copyright (C) 2022 Silicon Studio Co., Ltd. All rights reserved.
+//==============================================================================
 struct VS_INPUT
 {
     float4 Position : POSITION;

@@ -42,18 +42,33 @@ protected:
 	/// \return	none
 	//---------------------------------------------
 	ApplicationWindow(
-		int width,
-		int height,
-		LPCWSTR caption,
-		LPCWSTR className,
-		HINSTANCE hInstance,
-		WNDPROC wndProc
+		/* [in] */  int width,
+		/* [in] */  int height,
+		/* [in] */  LPCWSTR caption,
+		/* [in] */  LPCWSTR className,
+		/* [in] */  HINSTANCE hInstance,
+		/* [in] */  WNDPROC wndProc
 	);
 
-	HWND m_windowHandle; /// ウィンドウハンドル
+	//--------------------------------------------------------------------------
+	HWND m_windowHandle;
+	//--------------------------------------------------------------------------
+
+	/// <summary>
+	/// HWND m_windowHandle;   ウィンドウハンドル
+	/// </summary>
+	
 
 private:
-	LPCWSTR		m_className;    /// ウィンドウのクラス名
-	HINSTANCE	m_hInstance;    /// インスタンスハンドル
+	//--------------------------------------------------------------------------
+	LPCWSTR		m_className;
+	HINSTANCE	m_hInstance;
+	//--------------------------------------------------------------------------
+
+	/// <summary>
+	/// LPCWSTR		m_className;   ウィンドウのクラスネーム
+	/// HINSTANCE	m_hInstance;   インスタンスハンドル
+	/// </summary>
+	
 };
 

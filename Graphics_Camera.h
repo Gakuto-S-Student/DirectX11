@@ -19,10 +19,10 @@ public:
 	/// \return	none
 	//---------------------------------------------
 	static void Set3D(
-		float fov,      /* [in] */
-		float aspect,   /* [in] */
-		float nearZ,    /* [in] */
-		float farZ      /* [in] */
+		/* [in] */  float fov,
+		/* [in] */  float aspect,
+		/* [in] */  float nearZ,
+		/* [in] */  float farZ
 	);
 };
 

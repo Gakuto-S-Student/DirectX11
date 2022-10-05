@@ -22,9 +22,9 @@ public:
 	/// \return	none
 	//---------------------------------------------
 	Application(
-		const int width,	/* [in] */
-		const int height,   /* [in] */
-		HINSTANCE hInstance /* [in] */
+		/* [in] */  const int width,	
+		/* [in] */  const int height,   
+		/* [in] */  HINSTANCE hInstance 
 	);
 
 	//---------------------------------------------
@@ -55,10 +55,24 @@ public:
 	//---------------------------------------------
 	void Draw();
 
-	int m_ScreenW;	/// ウィンドウ幅
-	int m_ScreenH;	/// ウィンドウ高さ
+	//--------------------------------------------------------------------------
+	int m_ScreenW;
+	int m_ScreenH;
+	//--------------------------------------------------------------------------
+
+	/// <summary>
+	/// int m_ScreenW; ウィンドウ幅
+	/// int m_ScreenH; ウィンドウ高さ
+	/// </summary>
 
 private:
-	GraphicsCube* m_cube;	/// 
+	//--------------------------------------------------------------------------
+	GraphicsCube* m_cube;
+	//--------------------------------------------------------------------------
+
+	/// <summary>
+	/// GraphicsCube* m_cube; キューブクラス 
+	/// </summary>
+	
 };
 

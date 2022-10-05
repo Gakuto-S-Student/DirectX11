@@ -7,6 +7,7 @@
 #include "Graphics.h"
 using namespace DirectX;
 
+// マクロ定義
 #define REF_RATE_DEN 1		// リフレッシュレート(分母)
 #define REF_RATE_NUM 60		// リフレッシュレート(分子)
 

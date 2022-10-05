@@ -29,7 +29,7 @@ ID3D11ShaderResourceView* GraphicsTexture::CreateTexture()
 	textureDesc.MiscFlags           = 0;
 	
 	ID3D11Texture2D* texture;
-	HRESULT hr = Graphics::Get()->Device()->CreateTexture2D(&textureDesc, nullptr, &texture);
+	Graphics::Get()->Device()->CreateTexture2D(&textureDesc, nullptr, &texture);
 	if (!texture)
 	{
 		return nullptr;
@@ -47,6 +47,8 @@ ID3D11ShaderResourceView* GraphicsTexture::CreateTexture()
 	// ここで書き込む
 	BYTE* pBits = (BYTE*)msr.pData;
 	
+	// チェック模様のテクスチャを作成
+	const int RGBA = 4;
 	DWORD white = 0xffffffff;
 	DWORD black = 0xff000000;
 	for (int y = 0; y < height; ++y)
@@ -62,7 +64,7 @@ ID3D11ShaderResourceView* GraphicsTexture::CreateTexture()
 			{
 				color = white;
 			}
-			memcpy((BYTE*)pBits + msr.RowPitch * y + x * 4, &color, sizeof(DWORD));
+			memcpy((BYTE*)pBits + msr.RowPitch * y + x * RGBA, &color, sizeof(DWORD));
 		}
 	}
 	Graphics::Get()->Context()->Unmap(texture, 0);
@@ -70,13 +72,14 @@ ID3D11ShaderResourceView* GraphicsTexture::CreateTexture()
 	// ShaderResourceViewの情報を作成する
 	D3D11_SHADER_RESOURCE_VIEW_DESC resourceDesc;
 	resourceDesc.Format                     = textureDesc.Format;
-	resourceDesc.ViewDimension              = D3D11_SRV_DIMENSION_TEXTURE2D;
+	resourceDesc.ViewDimension              = D3D11_SRV_DIMENSION::D3D11_SRV_DIMENSION_TEXTURE2D;
 	resourceDesc.Texture2D.MostDetailedMip  = 0;
 	resourceDesc.Texture2D.MipLevels        = textureDesc.MipLevels;
 
 	ID3D11ShaderResourceView* ret;
 	Graphics::Get()->Device()->CreateShaderResourceView(texture, &resourceDesc, &ret);
 	
+	// Textureの解放
 	SAFE_RELEASE(texture);
 
     return ret;

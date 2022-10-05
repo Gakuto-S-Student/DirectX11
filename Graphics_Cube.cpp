@@ -14,14 +14,15 @@ using namespace DirectX;
 // 頂点の構造体
 struct Vertex3D
 {
-	XMFLOAT3 pos;
-	XMFLOAT2 uv;
+	XMFLOAT3 pos;   // 頂点位置
+	XMFLOAT2 uv;    // uv座標
 };
 
 
 // モデルデータ
 const Vertex3D g_CubeMeta[]
 {
+	// 頂点座標              // uv座標
 	{{ 1.0f,  1.0f,  1.0f}, {1.0f, 0.0f}},
 	{{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f}},
 	{{-1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}},

@@ -13,9 +13,9 @@ void GraphicsCamera::Set3D(float fov, float aspect, float nearZ, float farZ)
 {
 	// 行列変換(view)
 	XMMATRIX view = XMMatrixLookAtLH(
-		{ 0.0f, 5.0f, -5.0f },
-		{ 0.0f, 0.0f,  0.0f },
-		{ 0.0f, 1.0f,  0.0f }
+		{ 0.0f, 5.0f, -5.0f },	// カメラポジション
+		{ 0.0f, 0.0f,  0.0f },  // 注視点
+		{ 0.0f, 1.0f,  0.0f }   // 方向
 	);
 	Graphics::Get()->SetViewMatrix(view);
 

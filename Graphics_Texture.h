@@ -8,7 +8,11 @@
 class GraphicsTexture
 {
 public:
-
+	//---------------------------------------------
+	/// Creat texture of check pattern	
+	/// 
+	/// \return	ResourceView pointer
+	//---------------------------------------------
 	static ID3D11ShaderResourceView* CreateTexture();
 };
 
