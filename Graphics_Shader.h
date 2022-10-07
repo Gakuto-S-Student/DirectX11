@@ -35,7 +35,7 @@ public:
 
 private:
 	//---------------------------------------------
-	/// Load pixel shader
+	/// Load shader file
 	///
 	/// \param[in] ( fileName )
 	/// \param[out] ( buffer )
